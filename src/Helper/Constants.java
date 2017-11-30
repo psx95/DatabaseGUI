@@ -23,4 +23,7 @@ public class Constants {
     //PostGres
     public static final String JDBC_DRIVER_POSTGRES = "org.postgresql.Driver";
     public static final String DB_URL_POSTGRES = "jdbc:postgresql://localhost/";
+    //Cassandra 
+    public static final String CASSANDRA_HOST = "localhost";
+    public static final int CASSANDRA_PORT = 9042;
 }

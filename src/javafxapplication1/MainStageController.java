@@ -92,15 +92,31 @@ public class MainStageController implements Initializable {
     }
    
     public void updateConnectionStatusMongodb () {        
-        if (App.mongodbConnection != null && performTestQuriesOnMongo()) {
+        if (App.mongodbClient != null && performTestQuriesOnMongo()) {
             conn_status_mongo.setText("Connection OK");
         } else {
             conn_status_mongo.setText("Checked_still_prob");
         }
     }
     
+    public void updateConnectionStatusCassandra() {
+        if (App.cassandra_session!=null && performTestQueriesOnCassandra()) {
+            conn_status_cassandra.setText("Connection OK");            
+        } else {
+            conn_status_cassandra.setText("Checked_still_prob");
+        }
+    }
+    
+    public void updateConnectionStatusPostgres() {
+        if (App.postgresConnection!= null && performTestQueriesOnPostgres()) {
+            conn_status_postgres.setText("Connection OK ");          
+        } else {
+            conn_status_postgres.setText("Checked_still_prob");
+        }
+    }
+    
     public boolean performTestQuriesOnMongo() {
-        MongoDatabase database = (App.mongodbConnection).getDatabase("test_db");
+        MongoDatabase database = (App.mongodbClient).getDatabase("test_db");
         if (database!=null) {
             for (String name : database.listCollectionNames()) {
                 System.out.println(name);
@@ -126,6 +142,14 @@ public class MainStageController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(MainStageController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return true;
+    }
+    
+    public boolean performTestQueriesOnPostgres () {        
+        return true;
+    }
+    
+    public boolean performTestQueriesOnCassandra () {
         return true;
     }
 }

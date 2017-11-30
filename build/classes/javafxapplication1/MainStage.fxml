@@ -70,8 +70,8 @@
             </ImageView>
             <Label fx:id="conn_status_mysql" onMouseClicked="#updateConnectionStatusMySql" text="Connection status " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label fx:id="conn_status_mongo" layoutX="412.0" layoutY="62.0" onMouseClicked="#updateConnectionStatusMongodb" text="Connection status " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Label fx:id="conn_status_postgres" layoutX="410.0" layoutY="182.0" text="Connection status " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Label fx:id="conn_status_cassandra" text="Connection status " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />           
+            <Label fx:id="conn_status_postgres" layoutX="410.0" layoutY="182.0" onMouseClicked="#updateConnectionStatusPostgres" text="Connection status " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Label fx:id="conn_status_cassandra" onMouseClicked="#updateConnectionStatusCassandra" text="Connection status " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />           
          </children>
       </GridPane>
     </children>

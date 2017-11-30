@@ -5,6 +5,8 @@
  */
 package Helper;
 
+import com.datastax.driver.core.Cluster;
+import com.datastax.driver.core.Cluster.Builder;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import java.io.File;
@@ -33,7 +35,7 @@ public class DatabaseConnections {
             prepareMysqlDriver();
             prepareMongoDBDriver();
             prepareCassandraDriver();
-            preparePostgresDrive();
+            preparePostgresDriver();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseConnections.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -56,23 +58,41 @@ public class DatabaseConnections {
         }
     }
 
-    private static void preparePostgresDrive() {
-        
+    private static void preparePostgresDriver() {
+       try {
+           File jar  = new File ("/connectors/postgresql-42.1.4.jar");
+           URL[] cp = new URL[1];
+           cp[0] = jar.toURI().toURL();
+           URLClassLoader loader = new URLClassLoader(cp, ClassLoader.getSystemClassLoader());
+           Class driverClass = loader.loadClass(Constants.JDBC_DRIVER_POSTGRES);
+           App.postresDriver = (Driver) driverClass.newInstance();
+           Properties props = new Properties();
+           props.setProperty("user", "postgres");
+           props.setProperty("password", "");           
+           App.postgresConnection = App.postresDriver.connect(Constants.DB_URL_POSTGRES, props);
+       } catch (MalformedURLException ex) {
+            Logger.getLogger(DatabaseConnections.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DatabaseConnections.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(DatabaseConnections.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(DatabaseConnections.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseConnections.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static void prepareCassandraDriver() {
-        
+       Builder b = Cluster.builder().addContactPoint(Constants.CASSANDRA_HOST);
+       b.withPort(Constants.CASSANDRA_PORT);
+       Cluster c = b.build();
+       App.cassandra_session = c.connect(); 
     }
 
-    private static void prepareMongoDBDriver() {
-        /*File jar = new File ("/connectors/mongodb-java-driver-3.5.0.jar");
-        URL[] cp = new URL[1];
-        cp[0] = jar.toURI().toURL();
-        URLClassLoader classLoader = new URLClassLoader(cp,ClassLoader.getSystemClassLoader());
-        Class driverClass = classLoader.loadClass(Constants.JAVA_MONGO_DRIVER);
-        App.mongodbConnection = (MongoClient) driverClass.newInstance();*/
-        App.mongodbConnection = new MongoClient(Constants.MONGO_HOST,Constants.MONGO_PORT);
-        MongoDatabase database = (App.mongodbConnection).getDatabase("test_db");
+    private static void prepareMongoDBDriver() {      
+        App.mongodbClient = new MongoClient(Constants.MONGO_HOST,Constants.MONGO_PORT);
+        MongoDatabase database = (App.mongodbClient).getDatabase("test_db");
     }
 
 }

@@ -6,6 +6,7 @@
 package javafxapplication1;
 
 import Helper.DatabaseConnections;
+import com.datastax.driver.core.Session;
 import com.mongodb.MongoClient;
 import java.sql.Connection;
 import java.sql.Driver;
@@ -22,12 +23,16 @@ import javafx.stage.Stage;
 public class App extends Application {
     
     public static Scene mainScene = null;
-    public static String current_db_name = "";  
+    public static String current_db_name = "";
+    // Drivers/Clients for the data stores
     public static Driver mysqlDriver = null;
-    public static Connection mysqlConnection = null;
-    public static MongoClient mongodbConnection = null;    
-    public static Driver cassandraDriver = null;
+    public static MongoClient mongodbClient = null;    
     public static Driver postresDriver = null;
+    public static Session cassandra_session = null;
+    
+    // connection for the various data stores 
+    public static Connection mysqlConnection = null;      
+    public static Connection postgresConnection = null;
     
     @Override
     public void start(Stage stage) throws Exception {
