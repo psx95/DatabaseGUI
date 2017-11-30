@@ -22,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -50,13 +51,18 @@ public class MainStageController implements Initializable {
     public  Label conn_status_postgres;
     @FXML
     public  Label conn_status_cassandra;
+    @FXML
+    public Button update_all_button;        
     
     Stage popupOpenDBStage = null;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        update_all_button.fire();
     }    
+    
+    
     
     public void openExistingDatabase () {
         /*try {
@@ -78,6 +84,13 @@ public class MainStageController implements Initializable {
     
     public void createNewDatabase () {
         
+    }
+    
+    public void updateAllConnectionStatus () {
+        updateConnectionStatusCassandra();
+        updateConnectionStatusMongodb();
+        updateConnectionStatusMySql();
+        updateConnectionStatusPostgres();
     }
     
     public Stage getPopupOpenDBStage () {
