@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -141,11 +142,24 @@ public class MainStageController implements Initializable {
             res.close();
         } catch (SQLException ex) {
             Logger.getLogger(MainStageController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
         return true;
     }
     
-    public boolean performTestQueriesOnPostgres () {        
+    public boolean performTestQueriesOnPostgres () {     
+        try {
+            Statement stmt = null;
+            String testQuery = "Select datname from pg_database";
+            stmt = App.postgresConnection.createStatement();
+            ResultSet resultSet = stmt.executeQuery(testQuery);
+            while (resultSet.next()) {
+                System.out.println (resultSet.getString("datname"));
+            }            
+        } catch (SQLException ex) {            
+            Logger.getLogger(MainStageController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
         return true;
     }
     
