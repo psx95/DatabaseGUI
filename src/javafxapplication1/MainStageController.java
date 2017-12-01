@@ -6,6 +6,7 @@
 package javafxapplication1;
 
 import Helper.DatabaseConnections;
+import Helper.TestQueries;
 import Helper.UsefulFunctions;
 import com.mongodb.client.MongoDatabase;
 import java.net.URL;
@@ -55,6 +56,7 @@ public class MainStageController implements Initializable {
     public Button update_all_button;        
     
     Stage popupOpenDBStage = null;
+    private TestQueries testQueries = new TestQueries();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -98,7 +100,7 @@ public class MainStageController implements Initializable {
     }
     
     public void updateConnectionStatusMySql () {
-        if (App.mysqlConnection != null && performTestQueriesOnMysql()) {
+        if (App.mysqlConnection != null && testQueries.performTestQueriesOnMysql()) {
             conn_status_mysql.setText("Connection OK");
         } else {
             conn_status_mysql.setText("Checked_still_prob");
@@ -106,7 +108,7 @@ public class MainStageController implements Initializable {
     }
    
     public void updateConnectionStatusMongodb () {        
-        if (App.mongodbClient != null && performTestQuriesOnMongo()) {
+        if (App.mongodbClient != null && testQueries.performTestQuriesOnMongo()) {
             conn_status_mongo.setText("Connection OK");
         } else {
             conn_status_mongo.setText("Checked_still_prob");
@@ -114,7 +116,7 @@ public class MainStageController implements Initializable {
     }
     
     public void updateConnectionStatusCassandra() {
-        if (App.cassandra_session!=null && performTestQueriesOnCassandra()) {
+        if (App.cassandra_session!=null && testQueries.performTestQueriesOnCassandra()) {
             conn_status_cassandra.setText("Connection OK");            
         } else {
             conn_status_cassandra.setText("Checked_still_prob");
@@ -122,61 +124,10 @@ public class MainStageController implements Initializable {
     }
     
     public void updateConnectionStatusPostgres() {
-        if (App.postgresConnection!= null && performTestQueriesOnPostgres()) {
+        if (App.postgresConnection!= null && testQueries.performTestQueriesOnPostgres()) {
             conn_status_postgres.setText("Connection OK ");          
         } else {
             conn_status_postgres.setText("Checked_still_prob");
         }
-    }
-    
-    public boolean performTestQuriesOnMongo() {
-        MongoDatabase database = (App.mongodbClient).getDatabase("test_db");
-        if (database!=null) {
-            for (String name : database.listCollectionNames()) {
-                System.out.println(name);
-            }
-        } else {
-            return false;
-        }
-        return true;
-    }
-    
-    public boolean performTestQueriesOnMysql () {
-        try {
-            DatabaseMetaData meta = (App.mysqlConnection).getMetaData(); 
-            ResultSet res = meta.getCatalogs();
-            if (res == null) {
-                return false;
-            }
-            while (res.next()){
-                String db = res.getString("TABLE_CAT");
-                System.out.println (db);
-            }
-            res.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(MainStageController.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-        return true;
-    }
-    
-    public boolean performTestQueriesOnPostgres () {     
-        try {
-            Statement stmt = null;
-            String testQuery = "Select datname from pg_database";
-            stmt = App.postgresConnection.createStatement();
-            ResultSet resultSet = stmt.executeQuery(testQuery);
-            while (resultSet.next()) {
-                System.out.println (resultSet.getString("datname"));
-            }            
-        } catch (SQLException ex) {            
-            Logger.getLogger(MainStageController.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-        return true;
-    }
-    
-    public boolean performTestQueriesOnCassandra () {
-        return true;
     }
 }

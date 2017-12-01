@@ -16,7 +16,7 @@
          <font>
             <Font name="Avenir Light" size="25.0" />
          </font></Label>
-      <MenuBar maxWidth="1.7976931348623157E308" prefWidth="1000.0">
+      <MenuBar maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="1000.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>

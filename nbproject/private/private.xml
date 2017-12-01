@@ -5,11 +5,8 @@
         <group>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/App.java</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/MainStage.fxml</file>
-            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/UIComponents/PopupOpenDB.fxml</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/DatabaseConnections.java</file>
-            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/UIComponents/PopupController.java</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/MainStageController.java</file>
-            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/UsefulFunctions.java</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/Constants.java</file>
         </group>
     </open-files>
