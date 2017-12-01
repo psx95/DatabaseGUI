@@ -67,8 +67,8 @@ public class DatabaseConnections {
            Class driverClass = loader.loadClass(Constants.JDBC_DRIVER_POSTGRES);
            App.postresDriver = (Driver) driverClass.newInstance();
            Properties props = new Properties();
-           props.setProperty("user", "postgres");
-           props.setProperty("password", "");           
+           props.setProperty("user", Constants.USER_POSTGRES);
+           props.setProperty("password", Constants.PASS_POSTGRES);           
            App.postgresConnection = App.postresDriver.connect(Constants.DB_URL_POSTGRES, props);
        } catch (MalformedURLException ex) {
             Logger.getLogger(DatabaseConnections.class.getName()).log(Level.SEVERE, null, ex);
