@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 public class App extends Application {
     
     public static Scene mainScene = null;
+    public Stage mainStage = null;
     public static String current_db_name = "";
     // Drivers/Clients for the data stores
     public static Driver mysqlDriver = null;
@@ -38,9 +39,14 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("MainStage.fxml"));
         mainScene = new Scene(root);        
-        stage.setScene(mainScene);
+        stage.setScene(mainScene);       
         stage.show();   
+        mainStage = stage;
         DatabaseConnections.prepareDatabaseDrivers();     
+    }
+    
+    public Stage getMainStage() {
+        return this.mainStage;
     }
 
     /**

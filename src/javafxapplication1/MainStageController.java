@@ -9,6 +9,7 @@ import Helper.DatabaseConnections;
 import Helper.TestQueries;
 import Helper.UsefulFunctions;
 import com.mongodb.client.MongoDatabase;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -22,6 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -128,6 +130,18 @@ public class MainStageController implements Initializable {
             conn_status_postgres.setText("Connection OK ");          
         } else {
             conn_status_postgres.setText("Checked_still_prob");
+        }
+    }
+    
+    public void handleClickOnMySQL () {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("MySQLPerformance.fxml"));
+            Scene newScene = new Scene(root);
+            Stage curr_stage = (Stage) mysql_image_view.getScene().getWindow();
+            curr_stage.setScene(newScene);
+            curr_stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainStageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
