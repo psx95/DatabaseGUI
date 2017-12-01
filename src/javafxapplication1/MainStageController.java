@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,26 +66,6 @@ public class MainStageController implements Initializable {
         // TODO
         update_all_button.fire();
     }    
-    
-    
-    
-    public void openExistingDatabase () {
-        /*try {
-            Connection c = DatabaseConnections.connectToLocalhost();
-            if (!c.equals(null)) {
-                // continue further              
-                //label_no_open_db.setText("Database Found !!");
-                Class curr_class = getClass();                       
-                popupOpenDBStage = UsefulFunctions.prepareAnotherStage("/Helper/UIComponents/PopupOpenDB.fxml",curr_class, "Select Database");
-                popupOpenDBStage.show();
-                System.out.println ("Connected to localhost successfully ");
-            } else {
-                System.out.println("Unable to connect to Localhost");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(MainStageController.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-    }
     
     public void createNewDatabase () {
         
@@ -134,14 +115,34 @@ public class MainStageController implements Initializable {
     }
     
     public void handleClickOnMySQL () {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("MySQLPerformance.fxml"));
-            Scene newScene = new Scene(root);
-            Stage curr_stage = (Stage) mysql_image_view.getScene().getWindow();
+        loadScene("MySQLPerformance.fxml", mysql_image_view);
+    }
+    
+    public void handleClickOnPostgres() {
+        loadScene("PostgresPerformance.fxml", postgresql_image_view);
+    }
+    
+    public void handleClickOnMongoDB () {
+        loadScene("MongoPerformance.fxml", mongodb_image_view);
+    }
+    
+    public void handleClickOnCassandra () {
+        loadScene("CassandraPerformance.fxml", cassandra_image_view);
+    }
+    
+    private void loadScene(String resourceName, ImageView im) {
+        try {            
+            Parent root = FXMLLoader.load(getClass().getResource(resourceName));
+            Scene newScene = new Scene(root);            
+            Stage curr_stage = (Stage) im.getScene().getWindow();
             curr_stage.setScene(newScene);
             curr_stage.show();
         } catch (IOException ex) {
             Logger.getLogger(MainStageController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void exitApp() {
+        UsefulFunctions.universalExit();
     }
 }

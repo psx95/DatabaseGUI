@@ -20,9 +20,9 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#createNewDatabase" text="Create New Database..." />
-                  <MenuItem mnemonicParsing="false" onAction="#openExistingDatabase" text="Open New Database..." />
-                  <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" text="Create New Database..." />
+                  <MenuItem mnemonicParsing="false" text="Open New Database..." />
+                  <MenuItem mnemonicParsing="false" onAction="#exitApp" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -54,17 +54,17 @@
                   <Image url="@/res/MySQL-Logo.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="97.0" fitWidth="287.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <ImageView fx:id="mongodb_image_view" fitHeight="97.0" fitWidth="287.0" onMouseClicked="#handleClickOnMongoDB" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <image>
                   <Image url="@/res/800px-MongoDB-Logo.svg.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="99.0" fitWidth="402.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <ImageView fx:id="postgresql_image_view" fitHeight="99.0" fitWidth="402.0" onMouseClicked="#handleClickOnPostgres" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <image>
                   <Image url="@/res/postgresql-logo.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="101.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <ImageView fx:id="cassandra_image_view" fitHeight="101.0" fitWidth="400.0" onMouseClicked="#handleClickOnCassandra" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <image>
                   <Image url="@/res/2000px-Cassandra_logo.svg.png" />
                </image>

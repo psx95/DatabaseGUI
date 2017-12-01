@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fx:controller="javafxapplication1.MySQLPerformanceController" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication1.PostgresPerformanceController">
    <content>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1000.0">
          <children>
@@ -39,7 +39,7 @@
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../res/MySQL-Logo.png" />
+                              <Image url="@../res/postgresql-logo.png" />
                            </image>
                            <VBox.margin>
                               <Insets left="10.0" top="20.0" />
@@ -48,7 +48,7 @@
                      </children>
                   </VBox>
                   <Button layoutX="154.0" layoutY="198.0" mnemonicParsing="false" text="Import Dataset " />
-                  <Label layoutX="282.0" layoutY="69.0" prefHeight="52.0" prefWidth="671.0" text="Evaluate Performance of the MySQL Database against a benchmark dataset " textAlignment="CENTER" textFill="#5a8ac6">
+                  <Label contentDisplay="CENTER" layoutX="257.0" layoutY="59.0" prefHeight="52.0" prefWidth="724.0" text="Evaluate Performance of the Postgres Database against a benchmark dataset " textAlignment="CENTER" textFill="#5a8ac6">
                      <font>
                         <Font name="Arial Black" size="16.0" />
                      </font>
@@ -65,7 +65,7 @@
                     </yAxis>
                   </BarChart>
                   <Button layoutX="817.0" layoutY="625.0" mnemonicParsing="false" text="Run Tests" />
-                  <Button fx:id="back_button_mysql_performance" layoutX="24.0" layoutY="198.0" mnemonicParsing="false" onAction="#moveBackToMainScreen" text="Back" />
+                  <Button fx:id="back_button_postgres_performance" layoutX="24.0" layoutY="198.0" mnemonicParsing="false" onAction="#moveBackToMainScreen" text="Back" />
                </children>
             </AnchorPane>
          </children>

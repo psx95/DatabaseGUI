@@ -12,10 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafxapplication1.App;
 
 /**
  *
@@ -52,6 +56,32 @@ public class UsefulFunctions {
   
   public static Stage prepareAnotherStage (String location_scene, Class s) {
      return prepareAnotherStage(location_scene, s, "");
+  }
+  
+  public static void universalExit () {
+      try {
+          App.cassandra_session.close();
+          App.cassandraCluster.close();
+          App.mongodbClient.close();
+          App.mysqlConnection.close();
+          App.mysqlDriver = null;
+          App.postgresConnection.close();
+          App.postresDriver = null;
+          Platform.exit();
+      } catch (SQLException ex) {
+          Logger.getLogger(UsefulFunctions.class.getName()).log(Level.SEVERE, null, ex);
+      }
+  }
+  
+  public static void changeScene (String resourceName, Class curr_class, Node object) {
+      try {
+          Parent root = FXMLLoader.load(curr_class.getResource(resourceName));
+          Stage curr_stage = (Stage) object.getScene().getWindow();          
+          curr_stage.setScene(new Scene(root));
+          curr_stage.show();
+      } catch (IOException ex) {
+          Logger.getLogger(UsefulFunctions.class.getName()).log(Level.SEVERE, null, ex);
+      }
   }
   
 }

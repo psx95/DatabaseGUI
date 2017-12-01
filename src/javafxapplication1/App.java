@@ -6,15 +6,20 @@
 package javafxapplication1;
 
 import Helper.DatabaseConnections;
+import Helper.UsefulFunctions;
+import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
 import com.mongodb.MongoClient;
 import java.sql.Connection;
 import java.sql.Driver;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -34,14 +39,22 @@ public class App extends Application {
     // connection for the various data stores 
     public static Connection mysqlConnection = null;      
     public static Connection postgresConnection = null;
+    public static Cluster cassandraCluster = null;
     
     @Override
     public void start(Stage stage) throws Exception {
+        Platform.setImplicitExit(true);
         Parent root = FXMLLoader.load(getClass().getResource("MainStage.fxml"));
         mainScene = new Scene(root);        
         stage.setScene(mainScene);       
         stage.show();   
-        mainStage = stage;
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                UsefulFunctions.universalExit();
+            }
+        });
+        mainStage = stage;       
         DatabaseConnections.prepareDatabaseDrivers();     
     }
     

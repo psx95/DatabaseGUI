@@ -86,8 +86,8 @@ public class DatabaseConnections {
     private static void prepareCassandraDriver() {
        Builder b = Cluster.builder().addContactPoint(Constants.CASSANDRA_HOST);
        b.withPort(Constants.CASSANDRA_PORT);
-       Cluster c = b.build();
-       App.cassandra_session = c.connect(); 
+       App.cassandraCluster = b.build();
+       App.cassandra_session = App.cassandraCluster.connect(); 
     }
 
     private static void prepareMongoDBDriver() {      

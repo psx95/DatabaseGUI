@@ -8,8 +8,8 @@ package javafxapplication1;
 import Helper.UsefulFunctions;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 /**
@@ -17,10 +17,10 @@ import javafx.scene.control.Button;
  *
  * @author pranav
  */
-public class MySQLPerformanceController implements Initializable {
+public class PostgresPerformanceController implements Initializable {
 
     @FXML
-    private Button back_button_mysql_performance;
+    private Button back_button_postgres_performance;
     /**
      * Initializes the controller class.
      */
@@ -29,8 +29,7 @@ public class MySQLPerformanceController implements Initializable {
         // TODO
     }    
     
-    public void moveBackToMainScreen () {
-        UsefulFunctions.changeScene("MainStage.fxml", getClass(), back_button_mysql_performance);
+     public void moveBackToMainScreen () {
+        UsefulFunctions.changeScene("MainStage.fxml", getClass(), back_button_postgres_performance);
     }
-    
 }
