@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="JavaFXApplication1.jar" size="3303828" download="eager" />
+    <jar href="JavaFXApplication1.jar" size="3303854" download="eager" />
     <jar href="lib/HdrHistogram-2.1.9.jar" size="114165" download="eager" />
     <jar href="lib/asm-5.0.3.jar" size="53231" download="eager" />
     <jar href="lib/asm-analysis-5.0.3.jar" size="20443" download="eager" />
