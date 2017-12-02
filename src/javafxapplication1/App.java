@@ -27,9 +27,11 @@ import javafx.stage.WindowEvent;
  */
 public class App extends Application {
     
+    // Variables live through the lifetime of the application
     public static Scene mainScene = null;
-    public Stage mainStage = null;
-    public static String current_db_name = "";
+    public Stage mainStage = null;    
+    public static int current_selcted_db = 0;
+    
     // Drivers/Clients for the data stores
     public static Driver mysqlDriver = null;
     public static MongoClient mongodbClient = null;    

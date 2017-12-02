@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,12 +61,17 @@ public class UsefulFunctions {
   
   public static void universalExit () {
       try {
-          App.cassandra_session.close();
-          App.cassandraCluster.close();
-          App.mongodbClient.close();
-          App.mysqlConnection.close();
+          if (App.cassandra_session != null)
+            App.cassandra_session.close();
+          if (App.cassandraCluster != null)
+            App.cassandraCluster.close();
+          if (App.mongodbClient != null)
+            App.mongodbClient.close();
+          if (App.mysqlConnection != null)
+            App.mysqlConnection.close();         
+          if (App.postgresConnection != null)
+            App.postgresConnection.close();
           App.mysqlDriver = null;
-          App.postgresConnection.close();
           App.postresDriver = null;
           Platform.exit();
       } catch (SQLException ex) {
@@ -84,4 +90,20 @@ public class UsefulFunctions {
       }
   }
   
+  public static ArrayList<String> initilizeQueryListForMongo () {
+      ArrayList<String> arrayList = new ArrayList<>();
+      String[] queries = new String[] {
+          "db[\"nobench_main\"].find({}, [\"str1\", \"num\"])",
+          "db[\"nobench_main\"].find({}, [\"nested_obj.str\",\n" + "\"nested_obj.num\"])",
+          "db[\"nobench_main\"].find({ \"$or\" : [ { \"sparse_-\n" +
+          "XX0\" : {\"$exists\" : True} } , { \"sparse_XX9\" :\n" + "{\"$exists\" : True} } ] }, [\"sparse_XX0\", \"sparse_-\n" + "XX9\"])",
+          "db[\"nobench_main\"].find({ \"$or\" : [ { \"sparse_-\n" +
+        "XX0\" : {\"$exists\" : True} } , { \"sparse_YY0\" :\n" +
+        "{\"$exists\" : True} } ] }, [\"sparse_XX0\", \"sparse_-\n" +
+        "YY0\"])",
+         
+      }; 
+      arrayList.addAll(Arrays.asList(queries));
+      return arrayList;
+  }
 }

@@ -40,6 +40,25 @@ public class DatabaseConnections {
             Logger.getLogger(DatabaseConnections.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public static void reconnectDrivers () {
+        if (App.mysqlConnection == null) {
+            try {
+                prepareMysqlDriver();
+            } catch (SQLException ex) {
+                Logger.getLogger(DatabaseConnections.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        if (App.postgresConnection == null) {
+            preparePostgresDriver();
+        }
+        if (App.mongodbClient == null) {
+            prepareMongoDBDriver();
+        }
+        if (App.cassandra_session == null || App.cassandraCluster == null) {
+            prepareCassandraDriver();
+        } 
+    }
    
     private static void prepareMysqlDriver() throws SQLException {
         try {
@@ -84,15 +103,23 @@ public class DatabaseConnections {
     }
 
     private static void prepareCassandraDriver() {
-       Builder b = Cluster.builder().addContactPoint(Constants.CASSANDRA_HOST);
-       b.withPort(Constants.CASSANDRA_PORT);
-       App.cassandraCluster = b.build();
-       App.cassandra_session = App.cassandraCluster.connect(); 
+        try {
+            Builder b = Cluster.builder().addContactPoint(Constants.CASSANDRA_HOST);
+            b.withPort(Constants.CASSANDRA_PORT);
+            App.cassandraCluster = b.build();    
+            App.cassandra_session = App.cassandraCluster.connect(); 
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void prepareMongoDBDriver() {      
-        App.mongodbClient = new MongoClient(Constants.MONGO_HOST,Constants.MONGO_PORT);
-        MongoDatabase database = (App.mongodbClient).getDatabase("test_db");
+        try {
+            App.mongodbClient = new MongoClient(Constants.MONGO_HOST,Constants.MONGO_PORT);
+            MongoDatabase database = (App.mongodbClient).getDatabase("test_db");
+        } catch (RuntimeException e ){
+            e.printStackTrace();
+        }
     }
 
 }

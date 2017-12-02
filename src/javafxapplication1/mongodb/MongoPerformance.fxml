@@ -39,7 +39,7 @@
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../res/800px-MongoDB-Logo.svg.png" />
+                              <Image url="@../../res/800px-MongoDB-Logo.svg.png" />
                            </image>
                            <VBox.margin>
                               <Insets left="15.0" top="30.0" />

@@ -75,7 +75,8 @@
             <Label fx:id="conn_status_cassandra" onMouseClicked="#updateConnectionStatusCassandra" text="Connection status " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />           
          </children>
       </GridPane>
-      <Button fx:id="update_all_button" layoutX="670.0" layoutY="624.0" mnemonicParsing="false" onAction="#updateAllConnectionStatus" text="Update Connection Status " />          
+      <Button fx:id="update_all_button" layoutX="683.0" layoutY="634.0" mnemonicParsing="false" onAction="#updateAllConnectionStatus" prefHeight="27.0" prefWidth="152.0" text="Check Status " />
+      <Button layoutX="683.0" layoutY="600.0" mnemonicParsing="false" onAction="#tryReconnectToDB" text="Reconnect Databases" />          
        
     </children>
 </AnchorPane>
