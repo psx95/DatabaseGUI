@@ -93,15 +93,18 @@ public class UsefulFunctions {
   public static ArrayList<String> initilizeQueryListForMongo () {
       ArrayList<String> arrayList = new ArrayList<>();
       String[] queries = new String[] {
-          "db[\"nobench_main\"].find({}, [\"str1\", \"num\"])",
-          "db[\"nobench_main\"].find({}, [\"nested_obj.str\",\n" + "\"nested_obj.num\"])",
-          "db[\"nobench_main\"].find({ \"$or\" : [ { \"sparse_-\n" +
-          "XX0\" : {\"$exists\" : True} } , { \"sparse_XX9\" :\n" + "{\"$exists\" : True} } ] }, [\"sparse_XX0\", \"sparse_-\n" + "XX9\"])",
-          "db[\"nobench_main\"].find({ \"$or\" : [ { \"sparse_-\n" +
-        "XX0\" : {\"$exists\" : True} } , { \"sparse_YY0\" :\n" +
-        "{\"$exists\" : True} } ] }, [\"sparse_XX0\", \"sparse_-\n" +
-        "YY0\"])",
-         
+          "Query 1",
+          "Query 2",
+          "Query 3",
+          "Query 4",
+          "Query 5",
+          "Query 6",
+          "Query 7",
+          "Query 8",
+          "Query 9",
+          "Query 10",
+          "Query 11",
+          "Query 12",
       }; 
       arrayList.addAll(Arrays.asList(queries));
       return arrayList;

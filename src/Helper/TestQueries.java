@@ -6,15 +6,25 @@
 package Helper;
 
 import com.datastax.driver.core.Row;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Projections;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafxapplication1.App;
 import javafxapplication1.MainStageController;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 
 /**
  *
@@ -23,13 +33,20 @@ import javafxapplication1.MainStageController;
 public class TestQueries {
     
     public boolean performTestQuriesOnMongo() {
-        MongoDatabase database = (App.mongodbClient).getDatabase("test_db");
+        MongoDatabase database = (App.mongodbClient).getDatabase(Constants.DATABASE_TO_USE_MONGO);        
+        MongoCollection<Document> collection = database.getCollection("mycol");       
+        Bson queryProjection = Projections.fields(Projections.include(Arrays.asList("str1","num")));
+        Bson querySort = new Document("_id",1); //ascending order
+        List<Document> imgDocs = collection.find().projection(queryProjection).sort(querySort).into(new ArrayList<Document>());
         if (database!=null) {
             for (String name : database.listCollectionNames()) {
                 System.out.println(name);
             }
         } else {
             return false;
+        }
+        for (Document d : imgDocs) {
+            System.out.println (d.toJson());
         }
         return true;
     }

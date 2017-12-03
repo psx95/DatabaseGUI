@@ -5,9 +5,8 @@
         <group>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/MainStage.fxml</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/PostgresPerformance.fxml</file>
-            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/MongoPerformance.fxml</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/UIComponents/PopupController.java</file>
-            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/MongoPerformanceController.java</file>
+            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/mongodb/MongoPerformance.fxml</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/MainStageController.java</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/UIComponents/CreateDBForImportController.java</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/UIComponents/ImportDatasetProgress.fxml</file>

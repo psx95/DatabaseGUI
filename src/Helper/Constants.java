@@ -17,19 +17,23 @@ public class Constants {
     public static final String USER_MYSQL = "root";
     public static final String PASS_MYSQL = "";
     public static final int DB_NAME_MYSQL = 1;
+    public static final String DATABASE_TO_USE_MYSQL = "test_gendata";
     //MongoDB 
     public static final String JAVA_MONGO_DRIVER = "com.mongodb.MongoClient";
     public static final String MONGO_HOST = "localhost";
     public static final int MONGO_PORT = 27017;
     public static final int DB_NAME_MONGO = 2;
+    public static final String DATABASE_TO_USE_MONGO = "test_gendata";
     //PostGres
     public static final String JDBC_DRIVER_POSTGRES = "org.postgresql.Driver";
     public static final String DB_URL_POSTGRES = "jdbc:postgresql://localhost/";
     public static final String USER_POSTGRES = "postgres";
     public static final String PASS_POSTGRES = "";
     public static final int DB_NAME_POSTGRES = 3;
+    public static final String DATABASE_TO_USE_POSTGRES = "import_test";
     //Cassandra 
     public static final String CASSANDRA_HOST = "localhost";
     public static final int CASSANDRA_PORT = 9042;
     public static final int DB_NAME_CASSANDRA = 4;
+    public static final String DATABASE_TO_USE_CASSANDRA = "import_test";
 }

@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication1.MongoPerformanceController">
+<ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication1.mongodb.MongoPerformanceController">
    <content>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1000.0">
          <children>
@@ -59,7 +59,7 @@
                   <ListView fx:id="mongo_queries" layoutX="14.0" layoutY="299.0" prefHeight="287.0" prefWidth="200.0" />
                   <Label layoutX="39.0" layoutY="269.0" text="Select Queries to run :" />
                   <ToggleButton layoutX="53.0" layoutY="625.0" mnemonicParsing="false" text="Select All" />
-                  <BarChart layoutX="342.0" layoutY="186.0">
+                  <BarChart layoutX="449.0" layoutY="313.0" prefHeight="246.0" prefWidth="314.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -67,13 +67,15 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </BarChart>
-                  <Button layoutX="817.0" layoutY="625.0" mnemonicParsing="false" text="Run Tests" />
+                  <Button fx:id="run_query_mongo" layoutX="773.0" layoutY="625.0" mnemonicParsing="false" onAction="#runSelectedQueries" text="Run Selected Query " />
                   <Button fx:id="back_button_mongo_performance" layoutX="29.0" layoutY="185.0" mnemonicParsing="false" onAction="#moveBackToMainScreen" text="Back" textFill="#33944c" />
                   <Button fx:id="select_db_mongo" layoutX="154.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleSelectDB" text="Select Database" textFill="#33944c">
                      <font>
                         <Font name="Chalkboard" size="13.0" />
                      </font>
                   </Button>
+                  <Label layoutX="697.0" layoutY="151.0" text="Query Execution time:" />
+                  <Label fx:id="query_time" layoutX="838.0" layoutY="151.0" text="Time will appear here" />
                </children>
             </AnchorPane>
          </children>
