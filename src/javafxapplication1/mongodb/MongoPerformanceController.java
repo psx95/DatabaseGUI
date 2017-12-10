@@ -14,15 +14,20 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafxapplication1.MainStageController;
@@ -52,7 +57,15 @@ public class MongoPerformanceController implements Initializable {
     @FXML
     private Label query_time;
     
-    private FXMLLoader loader_for_current_controller;
+    @FXML 
+    private Button generate_graph_button;
+    
+    @FXML
+    private TextField number_of_graph_points;
+    
+    @FXML
+    private LineChart<Long,Long> execution_time_chart;
+        
     
     public long time = 0;
     private static MongoPerformanceController controllerInstance;
@@ -65,7 +78,15 @@ public class MongoPerformanceController implements Initializable {
         // TODO
         ArrayList<String> queries = UsefulFunctions.initilizeQueryListForMongo();
         mongo_queries.getItems().addAll(queries);
-        mongo_queries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);        
+        mongo_queries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);   
+        number_of_graph_points.textProperty().addListener(new ChangeListener<String>() {           
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    number_of_graph_points.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
         controllerInstance = this;
     }   
     
@@ -102,6 +123,24 @@ public class MongoPerformanceController implements Initializable {
     
     public Label getQueryLabel () {
         return query_time;
+    }
+    
+    public void generateGraph(ArrayList<Long> executionTimeList) {
+        LineChart.Series<Long,Long> chartSeries = new XYChart.Series<>();
+        for (int i = 0;i < executionTimeList.size(); i++){
+            chartSeries.getData().add(new XYChart.Data<Long,Long>((long)(i+1), executionTimeList.get(i)));
+        }
+        execution_time_chart.getData().add(chartSeries);
+        execution_time_chart.getXAxis().setLabel("Number of Points");
+        execution_time_chart.getYAxis().setLabel("Execution Time in ms");
+    }
+    
+    public void performGraphTasks() {
+        String s = number_of_graph_points.getText();
+        if (s!=null) {
+            int n = Integer.parseInt(s);        
+            new MongoJavaQueries().performTaskNTimes(n);        
+        }
     }
     
     public void updateTime (long time) {

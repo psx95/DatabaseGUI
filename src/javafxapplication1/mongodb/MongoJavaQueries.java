@@ -52,20 +52,21 @@ public class MongoJavaQueries {
     private  Calendar calendar = Calendar.getInstance();
     public static long time_taken;
     private  Scene progress = null;      
-    Task<Void> executeQuery = new Task<Void>() {
+    private ArrayList<Long> executionTimes;
+    Task<Void> executeQuery1 = new Task<Void>() {
             @Override
             protected Void call() throws Exception {                
                 performQuery1();                
                 return null;    
             }          
-        };
+        };    
     
     public MongoJavaQueries() {                
         init();
     }
     
     public void init () {              
-          executeQuery.setOnRunning(new EventHandler<WorkerStateEvent>() {
+          executeQuery1.setOnRunning(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent event) {               
                 try {
@@ -83,7 +84,7 @@ public class MongoJavaQueries {
             }
         });
         
-        executeQuery.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+        executeQuery1.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent event) {                                
                 System.out.println (time_taken+" time to query");
@@ -105,16 +106,69 @@ public class MongoJavaQueries {
         JSONObject stats_json = new JSONObject(stats);
         System.out.println (stats_json);        
         time_taken = stats_json.getJSONObject("executionStats").getInt("executionTimeMillis");
+        if (executionTimes!=null) {
+            executionTimes.add(time_taken);
+        }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         System.out.println(String.valueOf(time_taken));        
     }                          
     
-    public void performTask () {                                   
-        Thread t = new Thread(executeQuery);
+    public void performTask (Task<?> task) {                                   
+        Thread t = new Thread(task);
         t.setDaemon(true);
         t.start();        
         System.out.println ("Thread perform Task"+Thread.currentThread().getName());
     }      
+    
+    public void performTask () {
+        Thread t = new Thread(executeQuery1);
+        t.setDaemon(true);
+        t.start();        
+        System.out.println ("Thread perform Task"+Thread.currentThread().getName());
+    }
+    
+    public void performTaskNTimes (final int n) {
+        executionTimes = new ArrayList<Long>();
+        executionTimes.clear();
+            Task<Void> executeQuer1Ntimes = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                for (int i = 0; i< n; i++) {
+                    performQuery1();
+                }
+               return null;
+            }
+        };
+            executeQuer1Ntimes.setOnRunning(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                try {
+                    // display the progressbar
+                    Parent root = FXMLLoader.load(getClass().getResource("/Helper/UIComponents/QueryProgress.fxml"));
+                    progress = new Scene(root);                    
+                    progressIndicator = new Stage();
+                    progressIndicator.setScene(progress);
+                    progressIndicator.initModality(Modality.APPLICATION_MODAL);                    
+                    progressIndicator.show();                   
+                } catch (IOException ex) {
+                    Logger.getLogger(MongoJavaQueries.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+            
+            executeQuer1Ntimes.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                progressIndicator.close();
+                // generateGraphfrom here
+                MongoPerformanceController.getController().generateGraph(executionTimes);
+            }
+        });
+            Thread t = new Thread(executeQuer1Ntimes);
+            t.setDaemon(true);
+            t.start();
+    }
+    
 }
