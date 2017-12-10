@@ -122,7 +122,7 @@ public class MainStageController implements Initializable {
     
     public void handleClickOnMySQL () {
         App.current_selcted_db = Constants.DB_NAME_MYSQL;
-        loadScene("MySQLPerformance.fxml", mysql_image_view, Constants.DB_NAME_MYSQL);
+        loadScene("mysql/MySQLPerformance.fxml", mysql_image_view, Constants.DB_NAME_MYSQL);
     }
     
     public void handleClickOnPostgres() {

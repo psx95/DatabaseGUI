@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javafxapplication1;
+package javafxapplication1.mysql;
 
 import Helper.UsefulFunctions;
 import java.net.URL;
@@ -30,7 +30,7 @@ public class MySQLPerformanceController implements Initializable {
     }    
     
     public void moveBackToMainScreen () {
-        UsefulFunctions.changeScene("MainStage.fxml", getClass(), back_button_mysql_performance);
+        UsefulFunctions.changeScene("/javafxapplication1/MainStage.fxml", getClass(), back_button_mysql_performance);
     }
     
 }
