@@ -33,7 +33,7 @@ import org.bson.conversions.Bson;
 public class TestQueries {
     
     public boolean performTestQuriesOnMongo() {
-        MongoDatabase database = (App.mongodbClient).getDatabase(Constants.DATABASE_TO_USE_MONGO);        
+        /*MongoDatabase database = (App.mongodbClient).getDatabase(Constants.DATABASE_TO_USE_MONGO);        
         MongoCollection<Document> collection = database.getCollection("mycol");       
         Bson queryProjection = Projections.fields(Projections.include(Arrays.asList("str1","num")));
         Bson querySort = new Document("_id",1); //ascending order
@@ -47,6 +47,20 @@ public class TestQueries {
         }
         for (Document d : imgDocs) {
             System.out.println (d.toJson());
+        }
+        return true;
+*/
+        return listMongoDBs();
+    }
+    
+    public boolean listMongoDBs () {
+        MongoDatabase database = (App.mongodbClient).getDatabase("test_db");
+        if (database!=null) {
+            for (String name : database.listCollectionNames()) {
+                System.out.println(name);
+            }
+        } else {
+            return false;
         }
         return true;
     }

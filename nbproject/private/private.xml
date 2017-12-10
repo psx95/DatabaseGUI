@@ -4,22 +4,19 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/MainStage.fxml</file>
-            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/PostgresPerformance.fxml</file>
+            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/MongoQueries.java</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/UIComponents/PopupController.java</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/mongodb/MongoPerformance.fxml</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/MainStageController.java</file>
-            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/UIComponents/CreateDBForImportController.java</file>
-            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/UIComponents/ImportDatasetProgress.fxml</file>
-            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/MySQLPerformance.fxml</file>
+            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/mongodb/MongoPerformanceController.java</file>
+            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/UIComponents/QueryProgress.fxml</file>
+            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/QueryResult.java</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/App.java</file>
-            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/MySQLPerformanceController.java</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/Test.java</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/DatabaseConnections.java</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/UIComponents/InfoBox.fxml</file>
-            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/TestQueries.java</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/UIComponents/InfoBoxController.java</file>
-            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/UsefulFunctions.java</file>
-            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/PostgresPerformanceController.java</file>
+            <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/mongodb/MongoJavaQueries.java</file>
             <file>file:/Users/pranav/NetBeansProjects/JavaFXApplication1/src/Helper/Constants.java</file>
         </group>
     </open-files>

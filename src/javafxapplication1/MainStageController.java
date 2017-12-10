@@ -59,7 +59,7 @@ public class MainStageController implements Initializable {
     public  Label conn_status_cassandra;
     @FXML
     public Button update_all_button;        
-    
+        
     Stage popupOpenDBStage = null;
     private TestQueries testQueries = new TestQueries();
     
@@ -173,8 +173,8 @@ public class MainStageController implements Initializable {
                 break;
         }
         if (connection_ok) {
-            try {            
-                Parent root = FXMLLoader.load(getClass().getResource(resourceName));
+            try {                           
+                Parent root = FXMLLoader.load(getClass().getResource(resourceName));                
                 Scene newScene = new Scene(root);            
                 Stage curr_stage = (Stage) im.getScene().getWindow();
                 curr_stage.setScene(newScene);
@@ -183,7 +183,7 @@ public class MainStageController implements Initializable {
                 Logger.getLogger(MainStageController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
+    }    
     
     private void displayConnectionWarning(int db_name) {
         try {

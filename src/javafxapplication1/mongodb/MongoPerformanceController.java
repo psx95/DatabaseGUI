@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +25,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafxapplication1.MainStageController;
 
 /**
  * FXML Controller class
@@ -49,6 +51,12 @@ public class MongoPerformanceController implements Initializable {
     
     @FXML
     private Label query_time;
+    
+    private FXMLLoader loader_for_current_controller;
+    
+    public long time = 0;
+    private static MongoPerformanceController controllerInstance;
+    
     /**
      * Initializes the controller class.
      */
@@ -57,7 +65,8 @@ public class MongoPerformanceController implements Initializable {
         // TODO
         ArrayList<String> queries = UsefulFunctions.initilizeQueryListForMongo();
         mongo_queries.getItems().addAll(queries);
-        mongo_queries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        mongo_queries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);        
+        controllerInstance = this;
     }   
     
     
@@ -81,12 +90,26 @@ public class MongoPerformanceController implements Initializable {
     }
     
     public void moveBackToMainScreen () {
-        UsefulFunctions.changeScene("MainStage.fxml", getClass(), back_button_mongo_performance);
+        UsefulFunctions.changeScene("/javafxapplication1/MainStage.fxml", getClass(), back_button_mongo_performance);
     }
     
     public void runSelectedQueries() {
         List<String> selectedQueries = new ArrayList<String>();
-        selectedQueries = mongo_queries.getSelectionModel().getSelectedItems();
-        
+        selectedQueries = mongo_queries.getSelectionModel().getSelectedItems();        
+        new MongoJavaQueries().performTask();       
+        System.out.println ("Thread "+Thread.currentThread().getName() +" COntroller");
+    }
+    
+    public Label getQueryLabel () {
+        return query_time;
+    }
+    
+    public void updateTime (long time) {
+        this.time = time;
+        query_time.setText(String.valueOf(time)+" ms");
+    }
+    
+    public static MongoPerformanceController getController () {
+        return controllerInstance;
     }
 }
