@@ -65,10 +65,23 @@ public class MongoPerformanceController implements Initializable {
     
     @FXML
     private LineChart<Long,Long> execution_time_chart;
+    
+    @FXML 
+    private Button clear_graph_button;
+    
+    @FXML 
+    private Button reset_graph;
+    
+    @FXML
+    private Label average_time_multi_query;
         
     
     public long time = 0;
+    public long avg_time = 0;
     private static MongoPerformanceController controllerInstance;
+    private LineChart.Series<Long,Long> chartSeries;
+    private ArrayList<Long> executionTimeList = null;
+    private int number_of_lines_generated = 0;
     
     /**
      * Initializes the controller class.
@@ -126,21 +139,42 @@ public class MongoPerformanceController implements Initializable {
     }
     
     public void generateGraph(ArrayList<Long> executionTimeList) {
-        LineChart.Series<Long,Long> chartSeries = new XYChart.Series<>();
+        chartSeries = new XYChart.Series<>();
+        this.executionTimeList = executionTimeList;        
         for (int i = 0;i < executionTimeList.size(); i++){
             chartSeries.getData().add(new XYChart.Data<Long,Long>((long)(i+1), executionTimeList.get(i)));
-        }
-        execution_time_chart.getData().add(chartSeries);
+            avg_time+=executionTimeList.get(i);
+        }        
+        execution_time_chart.setCreateSymbols(true);
+        execution_time_chart.getData().add(chartSeries);        
         execution_time_chart.getXAxis().setLabel("Number of Points");
-        execution_time_chart.getYAxis().setLabel("Execution Time in ms");
+        execution_time_chart.getYAxis().setLabel("Execution Time in ms");        
+        average_time_multi_query.setText(String.valueOf((avg_time/executionTimeList.size()))+" ms");
+    }
+    
+    public void removeGraphPoints () {       
+        if (execution_time_chart.getData().size()>0) {
+            System.out.println ("Clearing graph");
+            //chartSeries.getData().removeAll(execution_time_chart.getData());
+            number_of_lines_generated-=1;
+            execution_time_chart.getData().remove(execution_time_chart.getData().size()-1);            
+        }
     }
     
     public void performGraphTasks() {
         String s = number_of_graph_points.getText();
         if (s!=null) {
             int n = Integer.parseInt(s);        
-            new MongoJavaQueries().performTaskNTimes(n);        
+            number_of_lines_generated+=1;
+            new MongoJavaQueries().performTaskNTimes(n);            
         }
+    }
+    
+    public void resetGraph() {
+        int s = number_of_lines_generated;
+        for (int i = 0; i<s;i++) {
+            removeGraphPoints();
+        }        
     }
     
     public void updateTime (long time) {
