@@ -9,6 +9,7 @@ import Helper.Constants;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.FindOptions;
 import com.mongodb.client.model.Projections;
 import com.mongodb.util.JSON;
@@ -69,8 +70,64 @@ public class MongoJavaQueries {
                 performQuery2();                
                 return null;    
             }          
-        };    
-    
+        };
+    Task<Void> executeQuery3 = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {                
+                performQuery3();                
+                return null;    
+            }          
+        };
+    Task<Void> executeQuery4 = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {                
+                    performQuery4();                
+                    return null;    
+                }          
+            };
+    Task<Void> executeQuery5 = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {                
+                    performQuery5();                
+                    return null;    
+                }          
+            };
+    Task<Void> executeQuery6 = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {                
+                    performQuery6();                
+                    return null;    
+                }          
+            };
+    Task<Void> executeQuery7 = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {                
+                    performQuery7();                
+                    return null;    
+                }          
+            };
+    Task<Void> executeQuery8 = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {                
+                    performQuery8();                
+                    return null;    
+                }          
+            };
+    Task<Void> executeQuery9 = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {                
+                    performQuery9();                
+                    return null;    
+                }          
+            };
+    Task<Void> executeQuery10 = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {                
+                    performQuery10();                
+                    return null;    
+                }          
+            };    
+   
     public MongoJavaQueries() {                
         init();
     }
@@ -131,6 +188,216 @@ public class MongoJavaQueries {
                 }
               }
           });
+        
+        executeQuery3.setOnRunning(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                  try {
+                    // display the progressbar
+                    Parent root = FXMLLoader.load(getClass().getResource("/Helper/UIComponents/QueryProgress.fxml"));
+                    progress = new Scene(root);
+                    progressIndicator = new Stage();
+                    progressIndicator.setScene(progress);
+                    progressIndicator.initModality(Modality.APPLICATION_MODAL);                    
+                    progressIndicator.show();
+                   
+                } catch (IOException ex) {
+                    Logger.getLogger(MongoJavaQueries.class.getName()).log(Level.SEVERE, null, ex);
+                }
+              }
+          });
+        executeQuery3.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                 System.out.println (time_taken+" time to query");
+                progressIndicator.close();                               
+                MongoPerformanceController.getController().updateTime(time_taken);               
+                System.out.println ("Thread "+Thread.currentThread().getName());               
+              }
+          });
+        
+        executeQuery4.setOnRunning(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                  try {
+                    // display the progressbar
+                    Parent root = FXMLLoader.load(getClass().getResource("/Helper/UIComponents/QueryProgress.fxml"));
+                    progress = new Scene(root);
+                    progressIndicator = new Stage();
+                    progressIndicator.setScene(progress);
+                    progressIndicator.initModality(Modality.APPLICATION_MODAL);                    
+                    progressIndicator.show();
+                   
+                } catch (IOException ex) {
+                    Logger.getLogger(MongoJavaQueries.class.getName()).log(Level.SEVERE, null, ex);
+                }
+              }
+          });
+        executeQuery4.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                 System.out.println (time_taken+" time to query");
+                progressIndicator.close();                               
+                MongoPerformanceController.getController().updateTime(time_taken);               
+                System.out.println ("Thread "+Thread.currentThread().getName());               
+              }
+          });
+        executeQuery5.setOnRunning(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                  try {
+                    // display the progressbar
+                    Parent root = FXMLLoader.load(getClass().getResource("/Helper/UIComponents/QueryProgress.fxml"));
+                    progress = new Scene(root);
+                    progressIndicator = new Stage();
+                    progressIndicator.setScene(progress);
+                    progressIndicator.initModality(Modality.APPLICATION_MODAL);                    
+                    progressIndicator.show();
+                   
+                } catch (IOException ex) {
+                    Logger.getLogger(MongoJavaQueries.class.getName()).log(Level.SEVERE, null, ex);
+                }
+              }
+          });
+        executeQuery5.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                 System.out.println (time_taken+" time to query");
+                progressIndicator.close();                               
+                MongoPerformanceController.getController().updateTime(time_taken);               
+                System.out.println ("Thread "+Thread.currentThread().getName());               
+              }
+          });
+        executeQuery6.setOnRunning(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                  try {
+                    // display the progressbar
+                    Parent root = FXMLLoader.load(getClass().getResource("/Helper/UIComponents/QueryProgress.fxml"));
+                    progress = new Scene(root);
+                    progressIndicator = new Stage();
+                    progressIndicator.setScene(progress);
+                    progressIndicator.initModality(Modality.APPLICATION_MODAL);                    
+                    progressIndicator.show();
+                   
+                } catch (IOException ex) {
+                    Logger.getLogger(MongoJavaQueries.class.getName()).log(Level.SEVERE, null, ex);
+                }
+              }
+          });
+        executeQuery6.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                 System.out.println (time_taken+" time to query");
+                progressIndicator.close();                               
+                MongoPerformanceController.getController().updateTime(time_taken);               
+                System.out.println ("Thread "+Thread.currentThread().getName());               
+              }
+          });
+        executeQuery7.setOnRunning(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                  try {
+                    // display the progressbar
+                    Parent root = FXMLLoader.load(getClass().getResource("/Helper/UIComponents/QueryProgress.fxml"));
+                    progress = new Scene(root);
+                    progressIndicator = new Stage();
+                    progressIndicator.setScene(progress);
+                    progressIndicator.initModality(Modality.APPLICATION_MODAL);                    
+                    progressIndicator.show();
+                   
+                } catch (IOException ex) {
+                    Logger.getLogger(MongoJavaQueries.class.getName()).log(Level.SEVERE, null, ex);
+                }
+              }
+          });
+        executeQuery7.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                 System.out.println (time_taken+" time to query");
+                progressIndicator.close();                               
+                MongoPerformanceController.getController().updateTime(time_taken);               
+                System.out.println ("Thread "+Thread.currentThread().getName());               
+              }
+          });
+        executeQuery8.setOnRunning(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                  try {
+                    // display the progressbar
+                    Parent root = FXMLLoader.load(getClass().getResource("/Helper/UIComponents/QueryProgress.fxml"));
+                    progress = new Scene(root);
+                    progressIndicator = new Stage();
+                    progressIndicator.setScene(progress);
+                    progressIndicator.initModality(Modality.APPLICATION_MODAL);                    
+                    progressIndicator.show();
+                   
+                } catch (IOException ex) {
+                    Logger.getLogger(MongoJavaQueries.class.getName()).log(Level.SEVERE, null, ex);
+                }
+              }
+          });
+        executeQuery8.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                 System.out.println (time_taken+" time to query");
+                progressIndicator.close();                               
+                MongoPerformanceController.getController().updateTime(time_taken);               
+                System.out.println ("Thread "+Thread.currentThread().getName());               
+              }
+          });
+        executeQuery9.setOnRunning(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                  try {
+                    // display the progressbar
+                    Parent root = FXMLLoader.load(getClass().getResource("/Helper/UIComponents/QueryProgress.fxml"));
+                    progress = new Scene(root);
+                    progressIndicator = new Stage();
+                    progressIndicator.setScene(progress);
+                    progressIndicator.initModality(Modality.APPLICATION_MODAL);                    
+                    progressIndicator.show();
+                   
+                } catch (IOException ex) {
+                    Logger.getLogger(MongoJavaQueries.class.getName()).log(Level.SEVERE, null, ex);
+                }
+              }
+          });
+        executeQuery9.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                 System.out.println (time_taken+" time to query");
+                progressIndicator.close();                               
+                MongoPerformanceController.getController().updateTime(time_taken);               
+                System.out.println ("Thread "+Thread.currentThread().getName());               
+              }
+          });
+        executeQuery10.setOnRunning(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                  try {
+                    // display the progressbar
+                    Parent root = FXMLLoader.load(getClass().getResource("/Helper/UIComponents/QueryProgress.fxml"));
+                    progress = new Scene(root);
+                    progressIndicator = new Stage();
+                    progressIndicator.setScene(progress);
+                    progressIndicator.initModality(Modality.APPLICATION_MODAL);                    
+                    progressIndicator.show();
+                   
+                } catch (IOException ex) {
+                    Logger.getLogger(MongoJavaQueries.class.getName()).log(Level.SEVERE, null, ex);
+                }
+              }
+          });
+        executeQuery10.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+              @Override
+              public void handle(WorkerStateEvent event) {
+                 System.out.println (time_taken+" time to query");
+                progressIndicator.close();                               
+                MongoPerformanceController.getController().updateTime(time_taken);               
+                System.out.println ("Thread "+Thread.currentThread().getName());               
+              }
+          });
     }
     
     private void performQuery1() {        
@@ -175,7 +442,84 @@ public class MongoJavaQueries {
             e.printStackTrace();
         }
         System.out.println(String.valueOf(time_taken));        
-    }                              
+    }     
+    
+    private void performQuery3() {
+        database = (App.mongodbClient).getDatabase(Constants.DATABASE_TO_USE_MONGO);        
+        collection = database.getCollection("mycol");
+        String stats = "";
+        Bson queryProjection = Projections.fields(Projections.include(Arrays.asList("sparse_550", "sparse_559")));                              
+        Bson modify = new Document("$explain",true);                
+        Bson filter = Filters.or(Arrays.asList(Filters.exists("sparse_550"),Filters.exists("sparse_559")));
+        List <Document> d2 = collection.find(filter).projection(queryProjection).modifiers(modify).into(new ArrayList<Document>());
+        List <Document> d3 = collection.find(filter).projection(queryProjection).into(new ArrayList<Document>());
+        d3.forEach((d) -> {
+            System.out.println (d.toJson());
+        });
+        try {
+        stats =  (d2.get(0).toJson());
+        JSONObject stats_json = new JSONObject(stats);
+        System.out.println (stats_json);        
+        time_taken = stats_json.getJSONObject("executionStats").getInt("executionTimeMillis");
+        if (executionTimes!=null) {
+            executionTimes.add(time_taken);
+        }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(String.valueOf(time_taken));        
+    }
+    
+    private void performQuery4() {
+        database = (App.mongodbClient).getDatabase(Constants.DATABASE_TO_USE_MONGO);        
+        collection = database.getCollection("mycol");
+        String stats = "";
+        //Bson queryProjection = Projections.fields(Projections.include(Arrays.asList("sparse_550", "sparse_559")));                              
+        Bson modify = new Document("$explain",true);
+        Bson filter = Filters.eq("str1", "GBRDCMBQGEYDCMBQGEYDAMBRGE======");
+        //Bson filter = Filters.or(Arrays.asList(Filters.exists("sparse_550"),Filters.exists("sparse_559")));
+        List <Document> d2 = collection.find(filter).modifiers(modify).into(new ArrayList<Document>());
+        List <Document> d3 = collection.find(filter).into(new ArrayList<Document>());
+        d3.forEach((d) -> {
+            System.out.println (d.toJson());
+        });
+        try {
+        stats =  (d2.get(0).toJson());
+        JSONObject stats_json = new JSONObject(stats);
+        System.out.println (stats_json);        
+        time_taken = stats_json.getJSONObject("executionStats").getInt("executionTimeMillis");
+        if (executionTimes!=null) {
+            executionTimes.add(time_taken);
+        }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(String.valueOf(time_taken));        
+    }
+    
+    private void performQuery5() {
+        
+    }
+    
+    private void performQuery6() {
+        
+    }
+    
+    private void performQuery7() {
+        
+    }
+    
+    private void performQuery8() {
+        
+    }
+    
+    private void performQuery9 () {
+        
+    }
+    
+    private void performQuery10 () {
+        
+    }
     
     public void performTask (Task<Void> task) {                                   
         Thread t = new Thread(task);
@@ -191,9 +535,11 @@ public class MongoJavaQueries {
             t = new Thread(executeQuery1);
         } else if (selectedTask.equals("Query 2")) {
             t = new Thread(executeQuery2);
-        } else {
-            t = new Thread(executeQuery1);
-        }      
+        } else if (selectedTask.equals("Query 3")){
+            t = new Thread(executeQuery3);
+        } else if (selectedTask.equals("Query 4")){
+            t = new Thread(executeQuery4);
+        }     
         t.setDaemon(true);
         t.start();        
         System.out.println ("Thread perform Task"+Thread.currentThread().getName());
@@ -210,8 +556,10 @@ public class MongoJavaQueries {
                         performQuery1();
                     } else if (selectedQuery.equals("Query 2")) {
                         performQuery2();
-                    } else {
-                        performQuery1();
+                    } else if (selectedQuery.equals("Query 3")){
+                        performQuery3();
+                    } else if (selectedQuery.equals("Query 4")) {
+                        performQuery4();
                     }
                 }
                return null;

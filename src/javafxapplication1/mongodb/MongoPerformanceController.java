@@ -153,8 +153,9 @@ public class MongoPerformanceController implements Initializable {
         execution_time_chart.setCreateSymbols(true);
         execution_time_chart.getData().add(chartSeries);        
         execution_time_chart.getXAxis().setLabel("Number of Points");
-        execution_time_chart.getYAxis().setLabel("Execution Time in ms");        
-        average_time_multi_query.setText(String.valueOf((avg_time/executionTimeList.size()))+" ms");
+        execution_time_chart.getYAxis().setLabel("Execution Time in ms"); 
+        if (avg_time!=0)
+            average_time_multi_query.setText(String.valueOf((avg_time/executionTimeList.size()))+" ms");
         avg_time = 0;
     }
     
