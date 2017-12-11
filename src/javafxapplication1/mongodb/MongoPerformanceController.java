@@ -129,9 +129,14 @@ public class MongoPerformanceController implements Initializable {
     
     public void runSelectedQueries() {
         List<String> selectedQueries = new ArrayList<String>();
-        selectedQueries = mongo_queries.getSelectionModel().getSelectedItems();        
-        new MongoJavaQueries().performTask();       
-        System.out.println ("Thread "+Thread.currentThread().getName() +" COntroller");
+        selectedQueries = mongo_queries.getSelectionModel().getSelectedItems();      
+        if (selectedQueries.size() > 0) {
+            new MongoJavaQueries().performTask(selectedQueries);       
+            System.out.println ("Thread "+Thread.currentThread().getName() +" COntroller");
+        } else {
+            // display the dialog for selecting one query 
+            UsefulFunctions.displayPopup("/Helper/UIComponents/NoQuerySelected.fxml", getClass());
+        }
     }
     
     public Label getQueryLabel () {
@@ -150,6 +155,7 @@ public class MongoPerformanceController implements Initializable {
         execution_time_chart.getXAxis().setLabel("Number of Points");
         execution_time_chart.getYAxis().setLabel("Execution Time in ms");        
         average_time_multi_query.setText(String.valueOf((avg_time/executionTimeList.size()))+" ms");
+        avg_time = 0;
     }
     
     public void removeGraphPoints () {       
@@ -166,7 +172,13 @@ public class MongoPerformanceController implements Initializable {
         if (s!=null) {
             int n = Integer.parseInt(s);        
             number_of_lines_generated+=1;
-            new MongoJavaQueries().performTaskNTimes(n);            
+            List<String> selectedQueries = new ArrayList<String>();
+            selectedQueries = mongo_queries.getSelectionModel().getSelectedItems();      
+            if (selectedQueries.size() == 1) {
+                new MongoJavaQueries().performTaskNTimes(n,selectedQueries.get(0));            
+            } else {
+                // add functionality here
+            }
         }
     }
     

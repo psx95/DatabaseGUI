@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Helper.UIComponents.NoQuerySelectedController">
+   <children>
+      <GridPane layoutY="41.0" prefHeight="200.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="394.0" minWidth="10.0" prefWidth="237.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="167.0" minHeight="10.0" prefHeight="121.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text fill="#d31c08" strokeType="OUTSIDE" strokeWidth="0.0" text="Oops.. Seems like you forgot to select a query ! Please select a Query to execute." textAlignment="CENTER" wrappingWidth="371.7392578125">
+               <GridPane.margin>
+                  <Insets left="15.0" right="15.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Chalkboard" size="19.0" />
+               </font>
+            </Text>
+            <Button fx:id="close_ok_button" mnemonicParsing="false" onAction="#closeAction" prefHeight="27.0" prefWidth="70.0" text="OK" textFill="#514444" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

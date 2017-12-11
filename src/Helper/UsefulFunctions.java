@@ -90,6 +90,18 @@ public class UsefulFunctions {
       }
   }
   
+  public static void displayPopup (String res, Class curr_class) {
+      try {
+          Parent root = FXMLLoader.load(curr_class.getResource(res));
+          Stage s = new Stage();
+          s.setScene(new Scene(root));
+          s.show();
+      } catch (IOException ex) {
+          Logger.getLogger(UsefulFunctions.class.getName()).log(Level.SEVERE, null, ex);
+      }
+      
+  }
+  
   public static ArrayList<String> initilizeQueryListForMongo () {
       ArrayList<String> arrayList = new ArrayList<>();
       String[] queries = new String[] {
