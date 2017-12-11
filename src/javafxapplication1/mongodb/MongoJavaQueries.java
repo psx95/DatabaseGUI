@@ -9,6 +9,7 @@ import Helper.Constants;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.FindOptions;
 import com.mongodb.client.model.Projections;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+
+import java.util.logging.Filter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -474,6 +477,32 @@ public class MongoJavaQueries {
         database = (App.mongodbClient).getDatabase(Constants.DATABASE_TO_USE_MONGO);        
         collection = database.getCollection("mycol");
         String stats = "";
+        Bson queryProjection = Projections.fields(Projections.include(Arrays.asList("sparse_880", "sparse_550")));                              
+        Bson modify = new Document("$explain",true);                
+        Bson filter = Filters.or(Arrays.asList(Filters.exists("sparse_880"),Filters.exists("sparse_550")));
+        List <Document> d2 = collection.find(filter).projection(queryProjection).modifiers(modify).into(new ArrayList<Document>());
+        List <Document> d3 = collection.find(filter).projection(queryProjection).into(new ArrayList<Document>());
+        d3.forEach((d) -> {
+            System.out.println (d.toJson());
+        });
+        try {
+        stats =  (d2.get(0).toJson());
+        JSONObject stats_json = new JSONObject(stats);
+        System.out.println (stats_json);        
+        time_taken = stats_json.getJSONObject("executionStats").getInt("executionTimeMillis");
+        if (executionTimes!=null) {
+            executionTimes.add(time_taken);
+        }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(String.valueOf(time_taken)); 
+    }
+    
+    private void performQuery5() {
+        database = (App.mongodbClient).getDatabase(Constants.DATABASE_TO_USE_MONGO);        
+        collection = database.getCollection("mycol");
+        String stats = "";
         //Bson queryProjection = Projections.fields(Projections.include(Arrays.asList("sparse_550", "sparse_559")));                              
         Bson modify = new Document("$explain",true);
         Bson filter = Filters.eq("str1", "GBRDCMBQGEYDCMBQGEYDAMBRGE======");
@@ -494,31 +523,143 @@ public class MongoJavaQueries {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println(String.valueOf(time_taken));        
-    }
-    
-    private void performQuery5() {
-        
+        System.out.println(String.valueOf(time_taken)); 
     }
     
     private void performQuery6() {
-        
+        database = (App.mongodbClient).getDatabase(Constants.DATABASE_TO_USE_MONGO);        
+        collection = database.getCollection("mycol");
+        String stats = "";
+        //Bson queryProjection = Projections.fields(Projections.include(Arrays.asList("sparse_550", "sparse_559")));                              
+        Bson modify = new Document("$explain",true);                
+        Bson filter = Filters.and(Arrays.asList(Filters.gte("num", 5000), Filters.lt("num", 9000)));
+        //Bson filter = Filters.or(Arrays.asList(Filters.exists("sparse_550"),Filters.exists("sparse_559")));
+        List <Document> d2 = collection.find(filter).modifiers(modify).into(new ArrayList<Document>());
+        List <Document> d3 = collection.find(filter).into(new ArrayList<Document>());
+        /*d3.forEach((d) -> {
+            System.out.println (d.toJson());
+        });*/
+        try {
+        stats =  (d2.get(0).toJson());
+        JSONObject stats_json = new JSONObject(stats);
+        System.out.println (stats_json);        
+        time_taken = stats_json.getJSONObject("executionStats").getInt("executionTimeMillis");
+        if (executionTimes!=null) {
+            executionTimes.add(time_taken);
+        }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(String.valueOf(time_taken));        
     }
     
     private void performQuery7() {
-        
+        database = (App.mongodbClient).getDatabase(Constants.DATABASE_TO_USE_MONGO);        
+        collection = database.getCollection("mycol");
+        String stats = "";
+        //Bson queryProjection = Projections.fields(Projections.include(Arrays.asList("sparse_550", "sparse_559")));                              
+        Bson modify = new Document("$explain",true);                
+        Bson filter = Filters.and(Arrays.asList(Filters.gte("dny1", 5000), Filters.lt("dyn1", 9000)));
+        //Bson filter = Filters.or(Arrays.asList(Filters.exists("sparse_550"),Filters.exists("sparse_559")));
+        List <Document> d2 = collection.find(filter).modifiers(modify).into(new ArrayList<Document>());
+        List <Document> d3 = collection.find(filter).into(new ArrayList<Document>());
+        d3.forEach((d) -> {
+            System.out.println (d.toJson());
+        });
+        try {
+        stats =  (d2.get(0).toJson());
+        JSONObject stats_json = new JSONObject(stats);
+        System.out.println (stats_json);        
+        time_taken = stats_json.getJSONObject("executionStats").getInt("executionTimeMillis");
+        if (executionTimes!=null) {
+            executionTimes.add(time_taken);
+        }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(String.valueOf(time_taken));        
     }
     
     private void performQuery8() {
-        
+        //TODO
+        database = (App.mongodbClient).getDatabase(Constants.DATABASE_TO_USE_MONGO);        
+        collection = database.getCollection("mycol");
+        String stats = "";
+        //Bson queryProjection = Projections.fields(Projections.include(Arrays.asList("sparse_550", "sparse_559")));                              
+        Bson modify = new Document("$explain",true);                
+        Bson filter = Filters.and(Arrays.asList(Filters.gte("dny1", 5000), Filters.lt("dyn1", 9000)));
+        //Bson filter = Filters.or(Arrays.asList(Filters.exists("sparse_550"),Filters.exists("sparse_559")));
+        List <Document> d2 = collection.find(filter).modifiers(modify).into(new ArrayList<Document>());
+        List <Document> d3 = collection.find(filter).into(new ArrayList<Document>());
+        d3.forEach((d) -> {
+            System.out.println (d.toJson());
+        });
+        try {
+        stats =  (d2.get(0).toJson());
+        JSONObject stats_json = new JSONObject(stats);
+        System.out.println (stats_json);        
+        time_taken = stats_json.getJSONObject("executionStats").getInt("executionTimeMillis");
+        if (executionTimes!=null) {
+            executionTimes.add(time_taken);
+        }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(String.valueOf(time_taken)); 
     }
     
     private void performQuery9 () {
-        
+        database = (App.mongodbClient).getDatabase(Constants.DATABASE_TO_USE_MONGO);        
+        collection = database.getCollection("mycol");
+        String stats = "";
+        //Bson queryProjection = Projections.fields(Projections.include(Arrays.asList("sparse_550", "sparse_559")));                              
+        Bson modify = new Document("$explain",true);
+        Bson filter = Filters.eq("nested_arr", "identity");
+        //Bson filter = Filters.or(Arrays.asList(Filters.exists("sparse_550"),Filters.exists("sparse_559")));
+        List <Document> d2 = collection.find(filter).modifiers(modify).into(new ArrayList<Document>());
+        List <Document> d3 = collection.find(filter).into(new ArrayList<Document>());
+        d3.forEach((d) -> {
+            System.out.println (d.toJson());
+        });
+        try {
+        stats =  (d2.get(0).toJson());
+        JSONObject stats_json = new JSONObject(stats);
+        System.out.println (stats_json);        
+        time_taken = stats_json.getJSONObject("executionStats").getInt("executionTimeMillis");
+        if (executionTimes!=null) {
+            executionTimes.add(time_taken);
+        }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(String.valueOf(time_taken)); 
     }
     
     private void performQuery10 () {
-        
+        database = (App.mongodbClient).getDatabase(Constants.DATABASE_TO_USE_MONGO);        
+        collection = database.getCollection("mycol");
+        String stats = "";        
+        Bson modify = new Document("$explain",true);                
+        Bson filter = Filters.and(Arrays.asList(Filters.gte("num", 5000), Filters.lt("num", 9000)));
+        //Bson filter = Filters.or(Arrays.asList(Filters.exists("sparse_550"),Filters.exists("sparse_559")));                
+        Bson match = Aggregates.match(filter);        
+        List <Document> d2 = collection.find(filter).modifiers(modify).into(new ArrayList<Document>());
+        List <Document> d3 = collection.find(filter).into(new ArrayList<Document>());
+        d3.forEach((d) -> {
+            System.out.println (d.toJson());
+        });
+        try {
+        stats =  (d2.get(0).toJson());
+        JSONObject stats_json = new JSONObject(stats);
+        System.out.println (stats_json);        
+        time_taken = stats_json.getJSONObject("executionStats").getInt("executionTimeMillis");
+        if (executionTimes!=null) {
+            executionTimes.add(time_taken);
+        }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(String.valueOf(time_taken));
     }
     
     public void performTask (Task<Void> task) {                                   
@@ -533,13 +674,25 @@ public class MongoJavaQueries {
         Thread t = null;
         if (selectedTask.equals("Query 1")) {
             t = new Thread(executeQuery1);
-        } else if (selectedTask.equals("Query 2")) {
+        } else if (selectedTask.equals("Query 2")){
             t = new Thread(executeQuery2);
         } else if (selectedTask.equals("Query 3")){
             t = new Thread(executeQuery3);
         } else if (selectedTask.equals("Query 4")){
             t = new Thread(executeQuery4);
-        }     
+        } else if (selectedTask.equals("Query 5")){
+            t = new Thread(executeQuery5);
+        } else if (selectedTask.equals("Query 6")){
+            t = new Thread(executeQuery6);
+        } else if (selectedTask.equals("Query 7")){
+            t = new Thread(executeQuery7);
+        }  else if (selectedTask.equals("Query 8")){
+            t = new Thread(executeQuery8);
+        } else if (selectedTask.equals("Query 9")){
+            t = new Thread(executeQuery9);
+        } else if (selectedTask.equals("Query 10")){
+            t = new Thread(executeQuery10);
+        }
         t.setDaemon(true);
         t.start();        
         System.out.println ("Thread perform Task"+Thread.currentThread().getName());
@@ -554,13 +707,25 @@ public class MongoJavaQueries {
                 for (int i = 0; i< n; i++) {                    
                     if (selectedQuery.equals("Query 1")) {
                         performQuery1();
-                    } else if (selectedQuery.equals("Query 2")) {
+                    } else if (selectedQuery.equals("Query 2")){
                         performQuery2();
                     } else if (selectedQuery.equals("Query 3")){
                         performQuery3();
-                    } else if (selectedQuery.equals("Query 4")) {
+                    } else if (selectedQuery.equals("Query 4")){
                         performQuery4();
-                    }
+                    } else if (selectedQuery.equals("Query 5")){
+                        performQuery5();
+                    } else if (selectedQuery.equals("Query 6")){
+                        performQuery6();
+                    } else if (selectedQuery.equals("Query 7")){
+                        performQuery7();
+                    } else if (selectedQuery.equals("Query 8")){
+                        performQuery8();
+                    } else if (selectedQuery.equals("Query 9")){
+                        performQuery9();
+                    } else if (selectedQuery.equals("Query 10")){
+                        performQuery10();
+                    } 
                 }
                return null;
             }
