@@ -107,7 +107,7 @@ public class DatabaseConnections {
             Builder b = Cluster.builder().addContactPoint(Constants.CASSANDRA_HOST);
             b.withPort(Constants.CASSANDRA_PORT);
             App.cassandraCluster = b.build();    
-            App.cassandra_session = App.cassandraCluster.connect(); 
+            App.cassandra_session = App.cassandraCluster.connect(Constants.KEYSPACE_TO_USE_CASSANDRA); 
         } catch (RuntimeException e) {
             e.printStackTrace();
         }

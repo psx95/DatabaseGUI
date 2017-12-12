@@ -35,5 +35,5 @@ public class Constants {
     public static final String CASSANDRA_HOST = "localhost";
     public static final int CASSANDRA_PORT = 9042;
     public static final int DB_NAME_CASSANDRA = 4;
-    public static final String DATABASE_TO_USE_CASSANDRA = "import_test";
+    public static final String KEYSPACE_TO_USE_CASSANDRA = "cds";
 }

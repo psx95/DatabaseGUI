@@ -89,7 +89,7 @@ public class MongoPerformanceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        ArrayList<String> queries = UsefulFunctions.initilizeQueryListForMongo();
+        ArrayList<String> queries = UsefulFunctions.initilizeQueryList();
         mongo_queries.getItems().addAll(queries);
         mongo_queries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);   
         number_of_graph_points.textProperty().addListener(new ChangeListener<String>() {           

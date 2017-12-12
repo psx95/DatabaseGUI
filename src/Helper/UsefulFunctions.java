@@ -102,7 +102,7 @@ public class UsefulFunctions {
       
   }
   
-  public static ArrayList<String> initilizeQueryListForMongo () {
+  public static ArrayList<String> initilizeQueryList () {
       ArrayList<String> arrayList = new ArrayList<>();
       String[] queries = new String[] {
           "Query 1",
@@ -113,10 +113,7 @@ public class UsefulFunctions {
           "Query 6",
           "Query 7",
           "Query 8",
-          "Query 9",
-          "Query 10",
-          "Query 11",
-          "Query 12",
+          "Query 9",          
       }; 
       arrayList.addAll(Arrays.asList(queries));
       return arrayList;
