@@ -88,6 +88,14 @@ public class CassandraJavaQueries {
             return null;
         }
     };
+    private Task<Void> executeQ7 = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {            
+            time_start = System.nanoTime();
+            performQuery7();
+            return null;
+        }
+    };
     
     public CassandraJavaQueries () {
         init();
@@ -294,6 +302,35 @@ public class CassandraJavaQueries {
             CassandraPerformanceController.getController().updateTime(time_taken);        
             }
         });
+        executeQ7.setOnRunning(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                 try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/Helper/UIComponents/QueryProgress.fxml"));
+                    progress = new Scene(root);
+                    progressIndicator = new Stage();
+                    progressIndicator.setScene(progress);
+                    progressIndicator.initModality(Modality.APPLICATION_MODAL);
+                    progressIndicator.show();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        executeQ7.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {    
+                System.out.println ("Success");
+            progressIndicator.close();
+            time_end = System.nanoTime();
+            long time_taken = time_end - time_start;
+            time_taken/=1000000;
+            if (executionTimes!=null) {
+                executionTimes.add(time_taken);
+            }
+            CassandraPerformanceController.getController().updateTime(time_taken);        
+            }
+        });
     }
     
     public void perfromTask (List<String> selectedQueries) {
@@ -312,6 +349,8 @@ public class CassandraJavaQueries {
             t = new Thread(executeQ5);
         } else if (selectedQuery.equals("Query 6")) {
             t = new Thread(executeQ6);
+        } else if (selectedQuery.equals("Query 7")) {
+            t = new Thread(executeQ7);
         }
         t.setDaemon(true);
         t.start();        
@@ -441,6 +480,20 @@ public class CassandraJavaQueries {
         }
     }
     
+    private void performQuery7() {
+        try {
+        String query = "Select Patient_ID,TN,SY,DI,MA,PP,CO from demo where TN = 'BP' allow filtering";
+        start_time = System.nanoTime();
+        ResultSet rs = (App.cassandra_session).execute(query);
+        for (Row r : rs) {
+            System.out.println (r.getFloat("sy"));
+        }
+        end_time = System.nanoTime();        
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void performTaskNTimes (final int n, String selectedQuery) {
         executionTimes = new ArrayList<Long>();
         executionTimes.clear();
@@ -461,7 +514,7 @@ public class CassandraJavaQueries {
                     } else if (selectedQuery.equals("Query 6")){
                         performQuery6();
                     } else if (selectedQuery.equals("Query 7")){
-                       // performQuery7();
+                        performQuery7();
                     } else if (selectedQuery.equals("Query 8")){
                        // performQuery8();
                     } else if (selectedQuery.equals("Query 9")){
