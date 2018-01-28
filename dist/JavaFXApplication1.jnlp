@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="JavaFXApplication1.jar" size="11450682" download="eager" />
+    <jar href="JavaFXApplication1.jar" size="12401845" download="eager" />
     <jar href="lib/HdrHistogram-2.1.9.jar" size="114165" download="eager" />
     <jar href="lib/asm-5.0.3.jar" size="53231" download="eager" />
     <jar href="lib/asm-analysis-5.0.3.jar" size="20443" download="eager" />
@@ -29,10 +29,7 @@
     <jar href="lib/json-java.jar" size="64952" download="eager" />
     <jar href="lib/lz4-1.3.0.jar" size="236880" download="eager" />
     <jar href="lib/metrics-core-3.2.2.jar" size="129402" download="eager" />
-    <jar href="lib/mongo-java-driver-2.12.2.jar" size="589444" download="eager" />
-    <jar href="lib/mongo-java-driver-3.0.0.jar" size="1278601" download="eager" />
     <jar href="lib/mongo-java-driver-3.6.0.jar" size="1893939" download="eager" />
-    <jar href="lib/mongodb-driver-3.5.0.jar" size="364609" download="eager" />
     <jar href="lib/mongodb-driver-3.6.0.jar" size="386989" download="eager" />
     <jar href="lib/mysql-connector-java-5.1.44-bin.jar" size="999635" download="eager" />
     <jar href="lib/mysql_java_driver.jar" size="999635" download="eager" />
