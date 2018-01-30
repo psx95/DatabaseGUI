@@ -22,4 +22,17 @@ To read about the lifecycle of this class follow this link - https://docs.oracle
 1. [**Oracle's JavaFX Documentation**](https://docs.oracle.com/javafx/2/overview/jfxpub-overview.htm)
 2. [**Oracle's Getting Started Tutorial**](https://docs.oracle.com/javafx/2/get_started/jfxpub-get_started.htm)
 
+### Screenshots
+1.Main Screen: 
+![alt text][main_screen]
+2. Performance Evaluation : 
+* MongoDB
+![alt text][mongo_graph]
+* Cassandra
+![alt text][cassandra_graph]
+
+[main_screen]: https://github.com/psx95/DatabaseGUI/blob/master/images/main%20screen.png "Application Main Screen"
+[mongo_graph]: https://github.com/psx95/DatabaseGUI/blob/master/images/mongo%20db.png "Performance Evaluation - MongoDB"
+[cassandra_graph]: https://github.com/psx95/DatabaseGUI/blob/master/images/cassandra.png "Performance Evaluation - Cassandra"
+
 ### P.S -  The project is still under development and is developed using the Netbeans 8.2 IDE
